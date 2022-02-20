@@ -2,7 +2,13 @@ package com.restaurant.demo.entity;
 
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,7 +26,8 @@ public class Category {
 	private String description;
 
 	@JsonIgnore
-	@OneToMany(mappedBy="category")
+	@OneToMany
+	(mappedBy="category")
 	private List<Product> listProducts;
 
 	public int getId() {
