@@ -14,8 +14,19 @@ public class ProductService {
 	@Autowired
 	ProductRepository productRepository;
 	
-	public ArrayList<Product> obtenerProductos(){
+	public ArrayList<Product> listProducts(){
 		return (ArrayList<Product>) productRepository.findAll();
 	}
-
+	
+	public ArrayList<Product> listProductsByCategory(int id){
+		return (ArrayList<Product>) productRepository.listProductsByCategory(id);
+	}
+	
+	public Product saveProdcut(Product product) {
+		return productRepository.save(product);
+	}
+	
+	public void deleteProduct(int id){
+		productRepository.deleteById(id);
+	}
 }
