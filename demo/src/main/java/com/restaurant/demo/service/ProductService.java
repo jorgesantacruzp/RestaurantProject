@@ -22,7 +22,7 @@ public class ProductService {
 		return (ArrayList<Product>) productRepository.listProductsByCategory(id);
 	}
 	
-	public Product saveProdcut(Product product) {
+	public Product saveProduct(Product product) {
 		return productRepository.save(product);
 	}
 	
