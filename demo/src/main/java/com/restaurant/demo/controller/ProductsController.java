@@ -15,7 +15,7 @@ import com.restaurant.demo.entity.Product;
 import com.restaurant.demo.service.ProductService;
 
 @RestController
-@RequestMapping("/API/products")
+@RequestMapping("/products")
 public class ProductsController {
 	
 	@Autowired
@@ -33,7 +33,7 @@ public class ProductsController {
 	
 	@PostMapping()
 	public Product saveProdcut(@RequestBody Product product) {
-		return this.productService.saveProdcut(product);
+		return this.productService.saveProduct(product);
 	}
 	
 	@DeleteMapping(path = "/{id}")
