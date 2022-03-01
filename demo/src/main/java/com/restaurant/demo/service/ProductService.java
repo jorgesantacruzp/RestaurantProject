@@ -1,6 +1,7 @@
 package com.restaurant.demo.service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,14 +13,18 @@ import com.restaurant.demo.repository.ProductRepository;
 public class ProductService {
 	
 	@Autowired
-	ProductRepository productRepository;
+	private ProductRepository productRepository;
 	
 	public ArrayList<Product> listProducts(){
 		return (ArrayList<Product>) productRepository.findAll();
 	}
 	
-	public ArrayList<Product> listProductsByCategory(int id){
-		return (ArrayList<Product>) productRepository.listProductsByCategory(id);
+	public ArrayList<Product> listProductsByCategory(String desc){
+		return (ArrayList<Product>) productRepository.listProductsByCategory(desc);
+	}
+	
+	public Optional<Product> findProductById(int id){
+		return productRepository.findById(id);
 	}
 	
 	public Product saveProduct(Product product) {

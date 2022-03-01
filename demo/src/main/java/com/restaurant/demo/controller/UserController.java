@@ -1,6 +1,5 @@
 package com.restaurant.demo.controller;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +18,10 @@ import com.restaurant.demo.service.UserService;
 public class UserController {
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	@GetMapping(path = "/{id}")
-	public Optional<User>  findUser(@PathVariable("id") int id){
+	public Optional<User> findUser(@PathVariable("id") int id){
 		return userService.findUserById(id);
 	}
 	
