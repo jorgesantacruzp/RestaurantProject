@@ -32,7 +32,7 @@ public class User {
 	@Column(name="birthday_date")
 	private Date birthday;
 	@Column(name="phone")
-	private int phone;
+	private String phone;
 	@Column(name="email")
 	private String email;
 	
