@@ -7,11 +7,11 @@ import org.springframework.http.HttpStatus;
 public class ApiException {
 
 	private final String mesage;
-	private final HttpStatus httpStatus;
+	private final int httpStatus;
 	private final ZonedDateTime timestamp;
 	
 	public ApiException(String mesage, 
-						HttpStatus httpStatus, 
+						int httpStatus, 
 						ZonedDateTime timestamp) {
 		super();
 		this.mesage = mesage;
@@ -23,7 +23,7 @@ public class ApiException {
 		return mesage;
 	}
 
-	public HttpStatus getHttpStatus() {
+	public int getHttpStatus() {
 		return httpStatus;
 	}
 
