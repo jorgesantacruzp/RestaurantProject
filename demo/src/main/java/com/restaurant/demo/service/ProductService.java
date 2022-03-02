@@ -1,25 +1,41 @@
 package com.restaurant.demo.service;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.restaurant.demo.entity.Product;
+import com.restaurant.demo.exception.ApiRequestException;
 import com.restaurant.demo.repository.ProductRepository;
 
 @Service
 public class ProductService {
 	
 	@Autowired
-	ProductRepository productRepository;
+	private ProductRepository productRepository;
 	
-	public ArrayList<Product> listProducts(){
-		return (ArrayList<Product>) productRepository.findAll();
+	public List<Product> listProducts(String category){
+		if(category == null) {
+			return (List<Product>) productRepository.findAll();
+		}else {
+			List<Product> listOfProducts = (List<Product>) productRepository.listProductsByCategory(category);
+			if(listOfProducts == null || listOfProducts.size()==0) {
+				throw new ApiRequestException("There are no products with this category");
+			}else {
+				return listOfProducts;
+			}
+		}
 	}
 	
-	public ArrayList<Product> listProductsByCategory(int id){
-		return (ArrayList<Product>) productRepository.listProductsByCategory(id);
+	public Optional<Product> findProductById(int id){
+		Optional<Product> product = productRepository.findById(id);
+		if(!product.isPresent()) {
+			throw new ApiRequestException("This ID does not exist");
+		}else {
+			return product;
+		}
 	}
 	
 	public Product saveProduct(Product product) {
