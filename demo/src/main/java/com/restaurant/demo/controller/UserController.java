@@ -23,13 +23,7 @@ public class UserController {
 	
 	@GetMapping(path = "/{id}")
 	public Optional<User> findUser(@PathVariable("id") int id){
-		
-		Optional<User> user = userService.findUserById(id);
-		if(!user.isPresent()) {
-			throw new ApiRequestException("This ID does not exist");
-		}else {
-			return user;
-		}
+		return userService.findUserById(id);
 	}
 	
 	@PostMapping()
