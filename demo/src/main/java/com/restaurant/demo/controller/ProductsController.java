@@ -1,6 +1,5 @@
 package com.restaurant.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,32 +23,15 @@ public class ProductsController {
 	
 	@Autowired
 	private ProductService productService;
-	
-	@GetMapping()
-	public ArrayList<Product> listProducts(){
-		return productService.listProducts();
-	}
-	
-	@GetMapping(path = "/category")
-	public List<Product> listProductsByCategory(@RequestParam String desc){
 		
-		List<Product> listOfProducts = productService.listProductsByCategory(desc);
-		if(listOfProducts == null || listOfProducts.size()==0) {
-			throw new ApiRequestException("There are no products with this category");
-		}else {
-			return listOfProducts;
-		}
+	@GetMapping()
+	public List<Product> listProducts(@RequestParam(required = false) String category){
+		return productService.listProducts(category);
 	}
 	
 	@GetMapping(path = "/{id}")
 	public Optional<Product> findProduct(@PathVariable("id") int id){
-		
-		Optional<Product> product = productService.findProductById(id);
-		if(!product.isPresent()) {
-			throw new ApiRequestException("This ID does not exist");
-		}else {
-			return product;
-		}
+		return productService.findProductById(id);
 	}
 	
 	@PostMapping()
@@ -60,7 +42,7 @@ public class ProductsController {
 	@DeleteMapping(path = "/{id}")
 	public String deleteProduct(@PathVariable("id") int id) {
 		productService.deleteProduct(id);
-		return "Se eliminó el usuario con id " + id;
+		return "Se eliminó el producto con id " + id;
 	}
 
 }
