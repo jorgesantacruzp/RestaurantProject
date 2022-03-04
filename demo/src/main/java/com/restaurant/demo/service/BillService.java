@@ -46,4 +46,8 @@ public class BillService {
 			return bill;
 		}
 	}
+	
+	public Bill saveBil(Bill bill) {
+		return billRepository.save(bill);
+	}
 }
