@@ -25,11 +25,6 @@ public class BillController {
 		return billService.listBills();
 	}
 	
-	@GetMapping("/user")
-	public List<Bill> listBillsByUser(@RequestParam(required = true) int id){
-		return billService.listBillsByUser(id);
-	}
-	
 	@GetMapping(path = "/{id}")
 	public Optional<Bill> findBill(@PathVariable("id") int id){
 		return billService.findBillById(id);

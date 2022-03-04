@@ -30,16 +30,20 @@ public class BillService {
 	}
 	
 	public List<Bill> listBillsByUser(int idUser){
-		//String id = Integer.toString(idUser);
-		//if(id==null) {
-		//	return (List<Bill>) billRepository.findAll();
-		//}else {
-			List<Bill> listOfBills = (List<Bill>) billRepository.listBillsByUser(idUser);
-			if(listOfBills.size()==0) {
-				throw new ApiRequestException("This user have no bills");
-			}else {
-				return listOfBills;
-			}
-		//}
+		List<Bill> listOfBills = (List<Bill>) billRepository.listBillsByUser(idUser);
+		if(listOfBills.size()==0) {
+			throw new ApiRequestException("This user has no bills");
+		}else {
+			return listOfBills;
+		}
+	}
+	
+	public Optional<Bill> findBillByUser(int idUser,int idBill){
+		Optional<Bill> bill = billRepository.findBillByUser(idUser,idBill);
+		if(!bill.isPresent()) {
+			throw new ApiRequestException("The ID of this bill does not belong to this user");
+		}else {
+			return bill;
+		}
 	}
 }
