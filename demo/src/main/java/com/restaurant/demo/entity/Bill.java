@@ -16,16 +16,16 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="tb_ticket")
-public class Ticket {
+@Table(name="tb_bill")
+public class Bill {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_ticket")
+	@Column(name="id_bill")
 	private int id;
-	@Column(name="ticket_number")
+	@Column(name="bill_number")
 	private String number;
 	@Column(name="issue_date")
 	private Date issueDate;
@@ -35,8 +35,8 @@ public class Ticket {
 	private User user;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="ticket")
-	private List<TicketDetails> listTicketDetails;
+	@OneToMany(mappedBy="bill")
+	private List<BillDetails> listBillDetails;
 
 	public int getId() {
 		return id;
@@ -70,12 +70,12 @@ public class Ticket {
 		this.user = user;
 	}
 
-	public List<TicketDetails> getListTicketDetails() {
-		return listTicketDetails;
+	public List<BillDetails> getListBillDetails() {
+		return listBillDetails;
 	}
 
-	public void setListTicketDetails(List<TicketDetails> listTicketDetails) {
-		this.listTicketDetails = listTicketDetails;
+	public void setListBillDetails(List<BillDetails> listBillDetails) {
+		this.listBillDetails = listBillDetails;
 	}
-	
+
 }

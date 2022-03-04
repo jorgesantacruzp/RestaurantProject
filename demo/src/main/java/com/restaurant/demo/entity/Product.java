@@ -37,7 +37,7 @@ public class Product {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="product")
-	private List<TicketDetails> listTicketDetails;
+	private List<BillDetails> listTicketDetails;
 
 	public int getId() {
 		return id;
@@ -79,11 +79,11 @@ public class Product {
 		this.category = category;
 	}
 
-	public List<TicketDetails> getListTicketDetails() {
+	public List<BillDetails> getListTicketDetails() {
 		return listTicketDetails;
 	}
 
-	public void setListTicketDetails(List<TicketDetails> listTicketDetails) {
+	public void setListTicketDetails(List<BillDetails> listTicketDetails) {
 		this.listTicketDetails = listTicketDetails;
 	}
 		
