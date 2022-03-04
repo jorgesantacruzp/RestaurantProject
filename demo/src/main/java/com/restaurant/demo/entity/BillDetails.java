@@ -10,8 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tb_ticket_details")
-public class TicketDetails {
+@Table(name="tb_bill_details")
+public class BillDetails {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -23,8 +23,8 @@ public class TicketDetails {
 	private int amount;
 	
 	@ManyToOne
-	@JoinColumn(name="id_ticket")
-	private Ticket ticket;
+	@JoinColumn(name="id_bill")
+	private Bill bill;
 	
 	@ManyToOne
 	@JoinColumn(name="id_prod")
@@ -46,12 +46,12 @@ public class TicketDetails {
 		this.amount = amount;
 	}
 
-	public Ticket getTicket() {
-		return ticket;
+	public Bill getTBill() {
+		return bill;
 	}
 
-	public void setTicket(Ticket ticket) {
-		this.ticket = ticket;
+	public void setBill(Bill bill) {
+		this.bill = bill;
 	}
 
 	public Product getProduct() {

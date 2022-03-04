@@ -42,7 +42,7 @@ public class User {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
-	private List<Ticket> listTickets;
+	private List<Bill> listBills;
 
 	public int getId() {
 		return id;
@@ -100,12 +100,12 @@ public class User {
 		this.role = role;
 	}
 
-	public List<Ticket> getListTickets() {
-		return listTickets;
+	public List<Bill> getListBills() {
+		return listBills;
 	}
 
-	public void setListTickets(List<Ticket> listTickets) {
-		this.listTickets = listTickets;
+	public void setListBills(List<Bill> listBills) {
+		this.listBills = listBills;
 	}
 	
 }
