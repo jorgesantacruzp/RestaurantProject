@@ -1,5 +1,7 @@
 package com.restaurant.demo.entity;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -13,11 +15,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+@EqualsAndHashCode
+@NoArgsConstructor
 @Entity
 @Table(name="tb_user")
-public class User {
+public class User implements UserDetails{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -35,6 +46,8 @@ public class User {
 	private String phone;
 	@Column(name="email")
 	private String email;
+	@Column(name="password")
+	private String password;
 	
 	@ManyToOne
 	@JoinColumn(name="id_role")
@@ -43,7 +56,20 @@ public class User {
 	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Bill> listBills;
+	
 
+	public User(String name, String lastname, Date birthday, String phone, String email, String password,
+			Role role) {
+		super();
+		this.name = name;
+		this.lastname = lastname;
+		this.birthday = birthday;
+		this.phone = phone;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -107,5 +133,45 @@ public class User {
 	public void setListBills(List<Bill> listBills) {
 		this.listBills = listBills;
 	}
-	
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
+		return Collections.singletonList(authority);
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
 }

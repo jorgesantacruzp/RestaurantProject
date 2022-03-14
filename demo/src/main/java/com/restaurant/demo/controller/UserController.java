@@ -43,8 +43,8 @@ public class UserController {
 		return billService.findBillByUser(idUser,idBill);
 	}
 	
-	@PostMapping()
+	@PostMapping("/registration")
 	public User saveUser(@RequestBody User user) {
-		return this.userService.saveUser(user);
+		return this.userService.signUpUser(user);
 	}
 }
