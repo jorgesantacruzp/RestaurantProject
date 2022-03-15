@@ -33,7 +33,7 @@ public class BillController {
 	}
 	
 	@PostMapping()
-	public Bill saveProdcut(@RequestBody Bill bill) {
+	public Bill saveBill(@RequestBody Bill bill) {
 		return this.billService.saveBil(bill);
 	}
 

@@ -2,6 +2,7 @@ package com.restaurant.demo.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,8 +27,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			.csrf().disable()
 			.authorizeRequests()
-				.antMatchers("/users/registration")
-				.permitAll()
+				.antMatchers(HttpMethod.POST,"/users/registration").permitAll()
+				.antMatchers(HttpMethod.GET,"/users/**").hasAnyAuthority("cliente","administrador")
+				.antMatchers(HttpMethod.GET,"/products/**").hasAnyAuthority("cliente","administrador")
+				.antMatchers(HttpMethod.POST,"/products/**").hasAnyAuthority("administrador")
+				.antMatchers(HttpMethod.DELETE,"/products/**").hasAnyAuthority("administrador")
+				.antMatchers("/bills/**").hasAnyAuthority("administrador")
 			.anyRequest()
 			.authenticated().and()
 			.formLogin();
